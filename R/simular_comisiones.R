@@ -30,6 +30,7 @@ stopifnot(abs(sum(PESOS) - 1) < 1e-9)
 #   por orden manual; CopyTrader sin costo adicional y sin comisión de acciones;
 #   retiro US$5 (mín. US$30).
 # Hapi: PSE 2% (supuesto del usuario; la ayuda de Hapi publica 0,45%, mín. US$1,99);
+#   tarjeta débito/crédito 3,85% (mín. US$2,99);
 #   ~US$0,15 de clearing por orden fraccionada (supuesto); retiro a banco local US$4,99.
 # Trii: depósito PSE $0; ticket COP 14.875 IVA incl. hasta COP 5M.
 #
@@ -44,6 +45,8 @@ TARIFAS <- list(
                               sub_usd = 0, retiro_usd = 5),
   hapi_pse_2pct = list(dep_pct = 0.02, dep_min = 1.99, fee_etf = 0.15, fee_accion = 0.15,
                        sub_usd = 0, retiro_usd = 4.99),
+  hapi_tarjeta = list(dep_pct = 0.0385, dep_min = 2.99, fee_etf = 0.15, fee_accion = 0.15,
+                      sub_usd = 0, retiro_usd = 4.99),
   trii_std_1ticket = list(dep_pct = 0, dep_min = 0, fee_etf = NA, fee_accion = NA,
                           ticket_unico = 14875 / COP_POR_USD, sub_usd = 0, retiro_usd = 0),
   trii_std_5tickets = list(dep_pct = 0, dep_min = 0, fee_etf = 14875 / COP_POR_USD,
@@ -135,7 +138,7 @@ for (ap in APORTES_USD) {
 # 4. Gráfico (base R, sin dependencias)
 # ---------------------------------------------------------------------------
 cols <- c(cero = "#2f2f2f", etoro_copy_tarjeta = "#12C47A", etoro_manual_tarjeta = "#0C7B4B",
-          hapi_pse_2pct = "#1F6FEB", trii_std_1ticket = "#E39B2B", trii_std_5tickets = "#C0392B")
+          hapi_pse_2pct = "#1F6FEB", hapi_tarjeta = "#8B8B8B", trii_std_1ticket = "#E39B2B", trii_std_5tickets = "#C0392B")
 dibujar <- function() {
   op <- par(mfrow = c(1, 2), mar = c(10, 5, 3, 1), las = 2)
   for (ap in APORTES_USD) {

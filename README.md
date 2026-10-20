@@ -25,12 +25,24 @@ Cada mes se compra el libro con el efectivo **neto de costos**. No hay rebalance
 | `etoro_copy_tarjeta` — copiar el portafolio @Andalejo1109, depósito con tarjeta | $0 de eToro | $0 (CopyTrader sin costo extra; sin comisión de acciones) | US$5 | sí |
 | `etoro_manual_tarjeta` — mismo libro, compra manual | $0 de eToro | US$1 por BRK.B; ETF $0 | US$5 | sí |
 | `hapi_pse_2pct` — Hapi por PSE | 2% (mín. US$1,99) | 5 × US$0,15 clearing (supuesto) | US$4,99 | sí |
+| `hapi_tarjeta` — Hapi con tarjeta débito/crédito | 3,85% (mín. US$2,99) | 5 × US$0,15 clearing (supuesto) | US$4,99 | sí |
 | `trii_std_1ticket` — Trii, una sola orden | $0 | COP 14.875 IVA incl. | — | sí |
 | `trii_std_5tickets` — Trii, mismo libro | $0 | 5 × COP 14.875 IVA incl. | — | sí |
 
 **Conversión COP→USD:** la TRM la fija el banco y, como inversores en Colombia, la aceptamos. No se modela ningún diferencial cambiario: FX = 0 en todas las plataformas.
 
-**Hapi 2%:** es un supuesto del caso. La ayuda oficial de Hapi publica hoy **0,45% (mín. US$1,99)** por PSE; con 2% el mínimo ya no domina (US$4 sobre 200, US$10 sobre 500).
+**Hapi 2% (supuesto del autor).** Tarifas de depósito vistas en la app de Hapi (octubre 2026):
+
+| Método | Comisión |
+|---|---|
+| USD vía Airtm | 0,65% (mín. US$2,99) |
+| COP vía PSE | 0,45% (mín. US$1,99) |
+| Tarjeta débito/crédito (USD/COP) | 3,85% (mín. US$2,99) |
+| Wire transfer | sin comisión de Hapi (el banco puede cobrar) |
+
+El mínimo de US$1,99 implica que el 0,45% solo rige desde ~US$442 por depósito (1,99 / 0,0045). Con un aporte de 200 el costo efectivo es ~1,0%. El 2% es un supuesto medio conservador del autor desde su experiencia (incluye montos menores y otros cargos), no una tarifa publicada.
+
+**Con tarjeta:** eToro no cobra comisión de depósito (0%); Hapi cobra 3,85% (mín. US$2,99).
 
 **GMF 4×1000:** se aplica al débito de la cuenta bancaria (pago del PSE o de la tarjeta) en todas las plataformas. Si la cuenta está marcada como exenta (Art. 879 ET), el costo baja para todas por igual.
 
@@ -49,7 +61,7 @@ Cada mes se compra el libro con el efectivo **neto de costos**. No hay rebalance
 
 Escenario `cero` = techo teórico (0 costos). Sirve de regla para medir *drag*.
 
-## Resultado — 10 años al 10% (ordenado por costo)
+## Resultado — 10 años al 10% (ordenado por costo a 200/mes)
 
 Aportes brutos: **24.000** (200/mes) o **60.000** (500/mes). Terminal sin costos: **39.973** y **99.932**.
 
@@ -60,9 +72,10 @@ Aportes brutos: **24.000** (200/mes) o **60.000** (500/mes). Terminal sin costos
 | eToro manual + tarjeta | 221 | 0,92% | 39.608 | 365 | 365 | 0,61% | 99.327 | 605 |
 | Trii estándar, 1 ticket | 542 | 2,26% | 39.070 | 903 | 686 | 1,14% | 98.789 | 1.143 |
 | Hapi PSE 2% | 671 | 2,80% | 38.859 | 1.114 | 1.535 | 2,56% | 97.379 | 2.553 |
+| Hapi tarjeta 3,85% | 1.115 | 4,65% | 38.119 | 1.854 | 2.645 | 4,41% | 95.530 | 4.402 |
 | Trii estándar, 5 tickets | 2.327 | 9,70% | 36.097 | 3.876 | 2.471 | 4,12% | 95.816 | 4.116 |
 
-A 5 años el orden no cambia (ver `output/resultados_comisiones.csv`).
+A 500/mes, Hapi tarjeta (2.645) queda por encima de Trii 5 tickets (2.471) y pasa a ser el más caro. A 5 años el orden no cambia (ver `output/resultados_comisiones.csv`).
 
 ![Drag a 10 años](output/drag_10anios.svg)
 
@@ -77,6 +90,7 @@ Es un resultado **educativo**, no una recomendación de plataforma ni de inversi
 ### Lectura
 
 - El **ticket fijo en COP** de Trii pega más cuando el aporte es chico **y** se parte en varios nombres: 5 tickets se llevan ~9,7% de cada aporte de 200 USD.
+- **Hapi con tarjeta** (3,85%) es el riel más caro de Hapi: casi el doble que el PSE al 2%.
 - El **2% de Hapi** escala con el aporte: a 500 USD/mes cuesta más del doble que a 200.
 - En eToro, el costo de operar este libro es casi irrelevante: US$1/mes por BRK.B en manual, $0 en copy.
 
